@@ -24,7 +24,7 @@ exports.getPosts = functions.https.onRequest((request, response) => {
 })
 
 exports.createPost = functions.https.onRequest((request, response) => {
-  if (request.method !=="POST"){
+  if (request.method !== "POST"){
     return response.status(400).json({ error: "Method not allowed"})
   }
   const newPost = {
