@@ -43,10 +43,38 @@ exapp.get('/posts', (request, response) => {
     .catch((err) => console.error(err))
 })
 
-exapp.post('/createPost', (request, response) => {
+const FBAuth = (request, response, next) => {
+  let idToken
+  if(request.headers.authorization && request.headers.authorization.startsWith('Bearer ')){
+    idToken = request.headers.authorization.split('Bearer ')[1]
+  }
+  else {
+    console.error('No token found\n' + request.headers.authorization);
+    return response.status(403).json({error: 'Unauthorized'})
+  }
+
+  admin.auth().verifyIdToken(idToken)
+    .then(decodedToken => {
+      request.user = decodedToken
+      return db.collection('Users')
+        .where('userId', '==', request.user.uid)
+        .limit(1)
+        .get()
+    })
+    .then(data => {
+      request.user.handle = data.docs[0].data().handle
+      return next()
+    })
+    .catch(err => {
+      console.log('Error while verifying token', err);
+      return response.status(403).json(err)
+    })
+}
+
+exapp.post('/createPost', FBAuth, (request, response) => {
   const newPost = {
     body: request.body.body,
-    userHandle: request.body.userHandle,
+    userHandle: request.user.handle,
     createdAt: new Date().toISOString()
   }
 
@@ -58,7 +86,7 @@ exapp.post('/createPost', (request, response) => {
     })
     .catch(err => {
       response.status(500).json({ error: 'something went wrong'})
-      console.log(err);
+      console.error(err);
     })
 })
 
@@ -140,7 +168,7 @@ exapp.post('/signup', (request, response) => {
       return response.status(201).json({ token })
     })
     .catch(err => {
-      console.log(err);
+      console.error(err);
       if(err.code === "auth/email-already-in-use"){
         return response.status(400).json({ email: "Email is already in use"})
       }
