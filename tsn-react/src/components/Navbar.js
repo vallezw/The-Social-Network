@@ -1,11 +1,11 @@
 import React from 'react'
 
 import Navbar from 'react-bootstrap/Navbar'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
+//import Form from 'react-bootstrap/Form'
+//import FormControl from 'react-bootstrap/FormControl'
 import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+//import Button from 'react-bootstrap/Button'
+//import NavDropdown from 'react-bootstrap/NavDropdown'
 
 export default function Navigationbar(){
   return(
