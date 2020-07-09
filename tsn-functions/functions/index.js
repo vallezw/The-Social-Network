@@ -5,13 +5,13 @@ const exapp = express()
 
 const FBAuth = require('./util/fbAuth');
 
-const { getAllPosts, postOnePost, getPost, commentOnPost, likePost, unlikePost } = require('./handlers/posts');
+const { getAllPosts, postOnePost, getPost, commentOnPost, likePost, unlikePost, deletePost } = require('./handlers/posts');
 const { signup, login, uploadImage, addUserDetails, getAuthenticatedUser } = require('./handlers/users');
 // Post routes
 exapp.get('/posts', getAllPosts)
 exapp.post('/createPost', FBAuth, postOnePost)
 exapp.get('/post/:postId', getPost)
-// TODO: delete scream
+exapp.delete('/post/:postId', FBAuth, deletePost)
 exapp.get('/post/:postId/like', FBAuth, likePost)
 exapp.get('/post/:postId/unlike', FBAuth, unlikePost)
 exapp.post('/post/:postId/comment', FBAuth, commentOnPost)
