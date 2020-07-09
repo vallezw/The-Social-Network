@@ -31,9 +31,9 @@ exports.api = functions.region('europe-west1').https.onRequest(exapp)
 
 exports.createNotificationOnLike = functions.region('europe-west1').firestore.document('Likes/{id}')
   .onCreate((snapshot) => {
-    db.doc(`/Posts/${snapshot.data().postId}`).get()
-      .then(doc => {
-        if(doc.exists){
+    return db.doc(`/Posts/${snapshot.data().postId}`).get()
+      .then(doc=> {
+        if(doc.exists && doc.data().userHandle !== snapshot.data().userHandle){
           return db.doc(`/Notifications/${snapshot.id}`).set({
             createdAt: new Date().toISOString(),
             recipient: doc.data().userHandle,
@@ -44,22 +44,15 @@ exports.createNotificationOnLike = functions.region('europe-west1').firestore.do
           })
         }
       })
-      .then(() => {
-        return
-      })
       .catch(err => {
         console.error(err);
-        return
       })
   })
 
 exports.deleteNotificationOnUnlike = functions.region('europe-west1').firestore.document('Like/{id}')
 .onDelete((snapshot) => {
-  db.doc(`/Notifications/${snapshot.id}`)
+  return db.doc(`/Notifications/${snapshot.id}`)
     .delete()
-    .then(() => {
-      return
-    })
     .catch(err => {
       console.error(err);
       return
@@ -68,9 +61,9 @@ exports.deleteNotificationOnUnlike = functions.region('europe-west1').firestore.
 
 exports.createNotificationOnComment = functions.region('europe-west1').firestore.document('Comments/{id}')
 .onCreate((snapshot) => {
-  db.doc(`/Posts/${snapshot.data().postId}`).get()
+  return db.doc(`/Posts/${snapshot.data().postId}`).get()
     .then(doc => {
-      if(doc.exists){
+      if(doc.exists && doc.data().userHandle !== snapshot.data().userHandle){
         return db.doc(`/Notifications/${snapshot.id}`).set({
           createdAt: new Date().toISOString(),
           recipient: doc.data().userHandle,
@@ -81,11 +74,52 @@ exports.createNotificationOnComment = functions.region('europe-west1').firestore
         })
       }
     })
-    .then(() => {
-      return
-    })
     .catch(err => {
       console.error(err);
       return
+    })
+})
+
+exports.onUserimageChange = functions.region('europe-west1').firestore.document('/Users/{userId}')
+  .onUpdate((change) => {
+    if(change.before.data().imageUrl !== change.after.data().imageUrl){
+      const batch = db.batch()
+      return db.collection('Posts').where('userHandle', '==', change.before.data().handle).get()
+        .then(data => {
+          data.forEach(doc => {
+            const post = db.doc(`Posts/${doc.id}`)
+            batch.update(post, { userImage: change.after.data().iamgeUrl })
+          })
+          return batch.commit()
+        })
+    }
+    else return true
+  })
+
+exports.onPostDelete= functions.region('europe-west1').firestore.document('Posts/{postId}')
+.onDelete((snapshot, context) => {
+  const postId = context.params.postId
+  const batch = db.batch()
+  return db.collection('Comments').where('postId', '==', postId).get()
+    .then(data => {
+      data.forEach(doc => {
+        batch.delete(db.doc(`/Comments/${doc.id}`))
+      })
+      return db.collection('Likes').where('postId', '==', postId).get()
+    })
+    .then(data => {
+      data.forEach(doc => {
+        batch.delete(db.doc(`/Likes/${doc.id}`))
+      })
+      return db.collection('Notifications').where('postId', '==', postId).get()
+    })
+    .then(data => {
+      data.forEach(doc => {
+        batch.delete(db.doc(`/Notifications/${doc.id}`))
+      })
+      return batch.commit()
+    })
+    .catch(err => {
+      console.error(err);
     })
 })
