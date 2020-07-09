@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
-import Link from 'react-router-dom/Link'
+import { Link } from 'react-router-dom'
 // MUI Imports
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
