@@ -1,5 +1,8 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { propTypes } from 'react-bootstrap/esm/Image'
 
 const AuthRoute = ({ comp: Component, authenticated, ...rest }) => {
     
@@ -11,4 +14,12 @@ const AuthRoute = ({ comp: Component, authenticated, ...rest }) => {
         />
     )
 }
-export default AuthRoute
+const mapStateToProps = (state) => ({
+    authenticated: state.user.authenticated
+})
+
+AuthRoute.propTypes = {
+    user: PropTypes.object.isRequired
+}
+
+export default connect(mapStateToProps)(AuthRoute)

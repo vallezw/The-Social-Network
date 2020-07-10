@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
 import AppIcon from '../images/newlogo_notitle.jpg'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 // MUI Stuff
 import Grid from '@material-ui/core/Grid'
@@ -11,7 +10,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
 // Redux stuff
-import { conect, connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { loginUser } from '../redux/actions/userActions'
 import { propTypes } from 'react-bootstrap/esm/Image'
 
