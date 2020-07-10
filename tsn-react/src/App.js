@@ -22,20 +22,13 @@ let authenticated
 const token = localStorage.FBIdToken
 if(token){
   const decodedToken = jwtDecode(token)
-  const unixExpDate = decodedToken.exp
-  const dateExpDate = new Date(unixExpDate * 1000)
-  console.log(dateExpDate > Date.now());
-  
-  if(dateExpDate > Date.now()){
+  const ts = Date.now()
+  const currentTime = Math.floor(ts/1000) - 7200
+  if(decodedToken.exp < currentTime){
     window.location.href = '/login'
-    //console.log(decodedToken);
-    
     authenticated = false
-    //console.log('authenticated is false');
   }
   else {
-    //console.log('authenticated is true');
-    
     authenticated = true
   }
 }
