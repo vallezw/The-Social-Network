@@ -5,7 +5,7 @@ import axios from 'axios'
 // Components
 import Post from '../components/Post'
 
-class Home extends Component {
+class home extends Component {
     
     state = {
         posts: null
@@ -39,4 +39,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default home
