@@ -12,35 +12,9 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-const styles = {
-    form: {
-        textAlign: 'center'
-    },
-    image: {
-        margin: '10px auto 10px auto',
-        width: '150px',
-        height: 'auto'
-    },
-    pageTitle: {
-        margin: '10px auto 10px auto',
-        fontFamily: 'Roboto'
-    },
-    textField: {
-        margin: '10px auto 10px auto'
-    },
-    button: {
-        marginTop: 20,
-        position: 'relative'
-    },
-    customError: {
-        color: 'tomato',
-        fontSize: '0.8rem',
-        marginTop: 7
-    },
-    progress: {
-        position: 'absolute'
-    }
-}
+const styles = (theme) => ({
+    ...theme.spreadThis
+})
 
 
 
@@ -49,8 +23,8 @@ class login extends Component {
     constructor(){
         super()
         this.state = {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
             loading: false,
             errors: {}
         }
@@ -68,7 +42,7 @@ class login extends Component {
         
         axios.post('/login', userData)
             .then(res => {
-                console.log(res.data);
+                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
                 this.setState({
                     loading: false
                 })
@@ -97,7 +71,7 @@ class login extends Component {
                 <Grid item sm>
                     <img src={AppIcon} alt="The Social Network Logo" className={classes.image}/>
                     <Typography variant="h2"className={classes.pageTitle}>
-                        LogIn
+                        login
                     </Typography>
                     <form noValidate onSubmit={this.handleSubmit}>
                         <TextField 
@@ -141,6 +115,7 @@ class login extends Component {
                                 <CircularProgress size={30} className={classes.progress} />
                             )}
                         </Button>
+                        <br />
                         <br />
                         <small>Dont have an account? Sign up <Link to="/signup">here</Link></small>
                     </form>

@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "dayjs": "^1.8.29",
+    "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.1.1",
     "react-dom": "^16.13.1",
@@ -37,5 +38,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://europe-west1-the-social-network-c6953.cloudfunctions.net/api"
+  "proxy": "https://europe-west1-the-social-network-c6953.cloudfunctions.net/api",
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
 }
