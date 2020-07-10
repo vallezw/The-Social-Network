@@ -5,9 +5,9 @@ import './App.css';
 // Navbar
 import Navbar from './components/Navbar'
 // Pages
-import Home from './pages/Home'
-import LogIn from './pages/LogIn'
-import SignUp from './pages/SignUp'
+import home from './pages/home'
+import login from './pages/login'
+import signup from './pages/signup'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 //import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -31,9 +31,9 @@ function App() {
           <Navbar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={LogIn} />
-              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/" component={home} />
+              <Route exact path="/login" component={login} />
+              <Route exact path="/signup" component={signup} />
             </Switch>
           </div>
         </Router>
