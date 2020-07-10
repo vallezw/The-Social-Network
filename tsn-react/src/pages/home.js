@@ -4,6 +4,7 @@ import axios from 'axios'
 
 // Components
 import Post from '../components/Post'
+import Profile from '../components/Profile'
 
 class home extends Component {
     
@@ -32,7 +33,7 @@ class home extends Component {
                     {recentPostsMarkUp}
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                    <p>Profile,...</p>
+                    <Profile />
                 </Grid>
             </Grid>
         )
