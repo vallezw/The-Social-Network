@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css';
 import themeFile from './util/theme'
 import jwtDecode from 'jwt-decode'
+//Redux
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 // Components
 import Navbar from './components/Navbar'
@@ -11,9 +14,10 @@ import AuthRoute from './util/AuthRoute'
 import home from './pages/home'
 import login from './pages/login'
 import signup from './pages/signup'
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 //import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+
 
 const theme = createMuiTheme(themeFile)
 
@@ -37,7 +41,7 @@ if(token){
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <div className="App">
+      <Provider store={store}>
         <Router>
           <Navbar />
           <div className="container">
@@ -48,7 +52,7 @@ function App() {
             </Switch>
           </div>
         </Router>
-      </div>
+      </Provider>
     </MuiThemeProvider>
   );
 }
