@@ -25,13 +25,17 @@ export default function(state = initialState, action){
                 ...state,
                 post: action.payload
             }
+        
         case LIKE_POST:
         case UNLIKE_POST:
             index = state.posts.findIndex((post) => post.postId === action.payload.postId)
-            state.post[index] = action.payload
+            state.posts[index] = action.payload
+            if(state.post.postId === action.payload.postId){
+                state.post = action.payload
+            }
             return{
                 ...state
-                }
+            }
         case DELETE_POST:
             index = state.posts.findIndex(post=> post.postId === action.payload)
             state.posts.splice(index, 1)

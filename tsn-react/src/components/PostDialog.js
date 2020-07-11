@@ -16,9 +16,11 @@ import Typography from '@material-ui/core/Typography'
 // Icons
 import UnfoldMore from '@material-ui/icons/UnfoldMore'
 import CloseIcon from '@material-ui/icons/Close'
+import ChatIcon from '@material-ui/icons/Chat'
 // Redux Stuff
 import { connect } from 'react-redux'
 import { getPost } from '../redux/actions/dataActions'
+import LikeButton from './LikeButton'
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -39,6 +41,15 @@ const styles = theme => ({
         postion: 'absolute',
         left: '65%'
     },
+    expandButton: {
+        position: 'absolute',
+        left: '90%'
+    },
+    spinnerDiv: {
+        textAlign: 'center',
+        marginTop: 50,
+        marginBottom: 50
+    }
 })
 
 
@@ -59,9 +70,11 @@ class PostDialog extends Component {
         const { classes, post: { postId, body, createdAt, likeCount, commentCount, userImage, userHandle}, UI: { loading }} = this.props
 
         const dialogMarkup = loading ? (
-            <CircularProgress size={200}/>
+            <div className={classes.spinnerDiv}>
+                <CircularProgress size={200} thickness={2}/>
+            </div>
         ) : (
-            <Grid container spacing={16}>
+            <Grid container spacing={5}>
                 <Grid item sm={5}>
                     <img src={userImage} alt="Profile" className={classes.profileImage} />
                 </Grid>
@@ -83,6 +96,14 @@ class PostDialog extends Component {
                     <Typography variant="body1">
                         {body}
                     </Typography>
+                    <LikeButton postId={postId} />
+                    <span>{likeCount} Likes</span>
+                    <Tooltip title="Comments">
+                        <IconButton>
+                            <ChatIcon color="primary" />
+                        </IconButton>
+                    </Tooltip>
+                    <span>{commentCount} Comments</span>
                 </Grid>
             </Grid>
         )
@@ -92,7 +113,7 @@ class PostDialog extends Component {
             <Fragment>
                 <Tooltip title="Expand Post" className={classes.expandButton}>
                     <IconButton onClick={this.handleOpen}>
-                        <UnfoldMore color="black" />
+                        <UnfoldMore />
                     </IconButton>
                 </Tooltip>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">

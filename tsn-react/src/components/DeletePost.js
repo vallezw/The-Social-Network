@@ -54,7 +54,7 @@ class DeletePost extends Component {
             <Fragment>
                 <Tooltip title="Delete Post">
                     <IconButton onClick={this.handleOpen} className={classes.deleteButton}>
-                        <DeleteOutline color="black" />
+                        <DeleteOutline />
                     </IconButton>
                 </Tooltip>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
@@ -65,7 +65,7 @@ class DeletePost extends Component {
                         Once you press delete it is not reverseable.
                     </DialogContentText>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="black">
+                        <Button onClick={this.handleClose}>
                             Cancel
                         </Button>
                         <Button onClick={this.handleDelete} color="primary">

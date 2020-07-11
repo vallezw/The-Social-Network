@@ -12,7 +12,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // Redux stuff
 import { connect } from 'react-redux'
 import { loginUser } from '../redux/actions/userActions'
-import { propTypes } from 'react-bootstrap/esm/Image'
 
 const styles = (theme) => ({
     ...theme.spreadThis
