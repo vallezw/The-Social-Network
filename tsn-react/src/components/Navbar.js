@@ -9,7 +9,7 @@ import Nav from 'react-bootstrap/Nav'
 // Icons
 import Notifications from '@material-ui/icons/Notifications'
 import AddIcon from '@material-ui/icons/Add';
-import { Tooltip } from '@material-ui/core';
+import { Tooltip, Typography } from '@material-ui/core';
 
 class Navigationbar extends Component{
   render(){
