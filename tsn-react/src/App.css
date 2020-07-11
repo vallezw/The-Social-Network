@@ -4,6 +4,8 @@ body{
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     background-color: rgb(245, 245, 245);
+    border: none;
+    outline:none;
 }
 .container{
   margin: 80px auto 0 auto 0;
@@ -13,3 +15,60 @@ a:hover {
   color: #CD5B45;
   text-decoration: none;
 }
+button.launch {
+  background-color: #F9A300;
+  border: none;
+  height: 40px;
+  padding: 5px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-right: 10px;
+  }
+  
+  button.launch:hover {
+  cursor: pointer;
+  background-color: #FABD44;
+  }
+  
+  button.launch {
+  background-color: #F9A300;
+  border: none;
+  height: 40px;
+  padding: 5px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-right: 10px;
+  }
+  
+  button.launch:hover {
+  cursor: pointer;
+  background-color: #FABD44;
+  }
+  
+  button.change {
+  background-color: #F88F00;
+  border: none;
+  height: 40px;
+  padding: 5px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 10px;
+  margin-right: 10px;
+  }
+  
+  button.change:hover {
+  cursor: pointer;
+  background-color: #F89900;
+  }
+  
+  button:active {
+  outline: none;
+  border: none;
+  }
+  
+  button:focus {outline:0;}
