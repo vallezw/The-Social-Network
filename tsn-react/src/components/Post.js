@@ -3,15 +3,25 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-
+import PropTypes from 'prop-types'
+import DeletePost from './DeletePost'
 // MUI Imports
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography'
+// Icons
+import ChatIcon from '@material-ui/icons/Chat'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
+// Redux Stuff
+import { connect } from 'react-redux'
+import {likePost, unlikePost} from '../redux/actions/dataActions'
+import { Tooltip, IconButton } from '@material-ui/core'
 
 const styles = {
     card: {
+        position: 'relative',
         display: 'flex',
         marginBottom: 20
     },
@@ -25,9 +35,59 @@ const styles = {
 }
 
 export class Post extends Component {
+    
+    likedPost = () => {
+        console.log(this.props.user.likes);
+        
+        if(this.props.user.likes && this.props.user.likes.find(like => like.postId === this.props.post.postId)){
+            return true
+        }
+        return false
+    }
+    
+    likePost = () => {
+        this.props.likePost(this.props.post.postId)
+    }
+    unlikePost = () => {
+        this.props.unlikePost(this.props.post.postId)
+    }
+
     render() {
         dayjs.extend(relativeTime)
-        const { classes, post: { body, createdAt, userImage, userHandle, postId, likeCount, commentCount} } = this.props
+        const { classes, post: { body, createdAt, userImage, userHandle, postId, likeCount, commentCount}, 
+        user: {
+            authenticated,
+            credentials: {handle}
+        } 
+        } = this.props        
+        const likeButton = !authenticated ? (
+            <Tooltip title="Like">
+                <IconButton>
+                    <Link to="/login">
+                        <FavoriteBorder color="primary"/>
+                    </Link>
+                </IconButton>
+            </Tooltip>
+        ) : (
+            this.likedPost() ? (
+                <Tooltip title="Unlike Post">
+                    <IconButton onClick={this.unlikePost}>
+                        <FavoriteIcon color="primary"/>
+                    </IconButton>
+                </Tooltip>
+            ): (
+                <Tooltip title="Like Post">
+                    <IconButton onClick={this.likePost}>
+                        <FavoriteBorder color="primary"/>
+                    </IconButton>
+                </Tooltip>
+            )
+        )
+
+        const deleteButton = authenticated && userHandle === handle ? (
+            <DeletePost postId={postId}/>
+        ) : null
+
         return (
             <Card className={classes.card}>
                 <CardMedia
@@ -35,12 +95,39 @@ export class Post extends Component {
                 title="Profile Image" className={classes.image}/>
                 <CardContent className={classes.content}>
                     <Typography variant="h5" component={Link} to={`/users/${userHandle}`} color="primary">{userHandle}</Typography>
+                    {deleteButton}
                     <Typography variant="body2" color="textSecondary">{dayjs(createdAt).fromNow()}</Typography>
                     <Typography variant="body1">{body}</Typography>
+                    {likeButton}
+                    <span>{likeCount} Likes</span>
+                    <Tooltip title="Comments">
+                        <IconButton>
+                            <ChatIcon color="primary" />
+                        </IconButton>
+                    </Tooltip>
+                    <span>{commentCount} Comments</span>
                 </CardContent>
             </Card>
         )
     }
 }
 
-export default withStyles(styles)(Post)
+Post.propTypes = {
+    likePost: PropTypes.func.isRequired,
+    unlikePost: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    post: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+const mapActionsToProps = {
+    likePost,
+    unlikePost
+}
+
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Post))
