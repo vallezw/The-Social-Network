@@ -5,14 +5,14 @@ export default {
       },
       secondary: {
         main: '#FF8C00',
-      },  
-    },
-    typography: {
-      useNextVariants: true
+      }
     },
     spreadThis: {
       form: {
         textAlign: 'center'
+      },
+      typography: {
+        useNextVariants: true
       },
       image: {
           margin: '10px auto 10px auto',
