@@ -68,7 +68,7 @@ export const unlikePost = (postId) => dispatch => {
         .then(res => {
             dispatch({
                 type: UNLIKE_POST,
-                payload: res.data
+                payload: res.data.postData
             })
         })
         .catch(err => console.error(err))

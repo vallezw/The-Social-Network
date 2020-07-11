@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CreatePost from './CreatePost'
 // Nav Stuff
