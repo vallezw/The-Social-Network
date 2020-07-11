@@ -2,14 +2,15 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button';
-
+import IconButton from '@material-ui/core/IconButton';
+import CreatePost from './CreatePost'
 // Nav Stuff
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 // Icons
 import Notifications from '@material-ui/icons/Notifications'
-import AddIcon from '@material-ui/icons/Add';
-import { Tooltip, Typography } from '@material-ui/core';
+
+import { Tooltip } from '@material-ui/core';
 
 class Navigationbar extends Component{
   render(){
@@ -22,16 +23,12 @@ class Navigationbar extends Component{
           <Fragment>
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Button>
-                <Tooltip title="Create a Post!">
-                  <AddIcon color="primary"/>
-                </Tooltip>
-              </Button>
-              <Button>
-                <Tooltip title="Notifications">
+              <CreatePost />
+              <Tooltip title="Notifications">
+                <IconButton>
                   <Notifications color="primary"/>
-                </Tooltip>
-              </Button>
+                </IconButton>
+              </Tooltip>
             </Nav>
           </Navbar.Collapse>
           </Fragment>

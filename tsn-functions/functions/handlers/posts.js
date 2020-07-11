@@ -25,7 +25,11 @@ exports.getAllPosts = (request, response) => {
 }
 
 // Create a Post
-exports.postOnePost =  (request, response) => {
+exports.postOnePost = (request, response) => {
+  if (request.body.body.trim() === '') {
+    return response.status(400).json({ body: 'Body must not be empty' });
+  }
+
   const newPost = {
     body: request.body.body,
     userHandle: request.user.handle,

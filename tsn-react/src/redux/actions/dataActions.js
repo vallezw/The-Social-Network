@@ -1,4 +1,4 @@
-import { SET_POSTS, LOADING_DATA, UNLIKE_POST, LIKE_POST, DELETE_POST} from '../types'
+import { SET_POSTS, LOADING_DATA, UNLIKE_POST, LIKE_POST, DELETE_POST, LOADING_UI, SET_ERRORS, CLEAR_ERRORS, CREATE_POST, SET_POST, STOP_LOADING_UI} from '../types'
 import axios from 'axios'
 
 // Get all Posts
@@ -17,6 +17,37 @@ export const getPosts = () => dispatch => {
                 payload: []
             })
         })
+}
+// Create a post
+export const createPost = (newPost) => (dispatch) => {
+    dispatch({ type: LOADING_UI})
+    axios.post('/createPost', newPost)
+        .then(res => {
+            dispatch({
+                type: CREATE_POST,
+                payload: res.data
+            })
+            dispatch({ type: CLEAR_ERRORS })
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
+}
+
+export const getPost = (postId) => dispatch => {
+    dispatch({ type: LOADING_UI})
+    axios.get(`/post/${postId}`)
+        .then(res => {
+            dispatch({
+                type: SET_POST,
+                payload: res.data
+            })
+            dispatch({ type: STOP_LOADING_UI})
+        })
+        .catch(err => console.error(err))
 }
 
 // Like a post
@@ -50,4 +81,8 @@ export const deletePost = (postId) => (dispatch) => {
             dispatch({ type: DELETE_POST, payload: postId})
         })
         .catch(err => console.error(err))
+}
+
+export const clearErrors = () => dispatch => {
+    dispatch({ type: CLEAR_ERRORS })
 }
