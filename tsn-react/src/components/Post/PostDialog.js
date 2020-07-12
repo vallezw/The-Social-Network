@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
+import Comments from './Comments'
 // MUI Stuff
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
@@ -19,15 +20,11 @@ import CloseIcon from '@material-ui/icons/Close'
 import ChatIcon from '@material-ui/icons/Chat'
 // Redux Stuff
 import { connect } from 'react-redux'
-import { getPost } from '../redux/actions/dataActions'
+import { getPost } from '../../redux/actions/dataActions'
 import LikeButton from './LikeButton'
 
 const styles = theme => ({
     ...theme.spreadThis,
-    invisibleSeperator: {
-        border: 'none',
-        margin: 4
-    },
     profileImage: {
         maxWidth: 200,
         height: 200,
@@ -67,7 +64,7 @@ class PostDialog extends Component {
     }
 
     render(){
-        const { classes, post: { postId, body, createdAt, likeCount, commentCount, userImage, userHandle}, UI: { loading }} = this.props
+        const { classes, post: { comments, postId, body, createdAt, likeCount, commentCount, userImage, userHandle}, UI: { loading }} = this.props
 
         const dialogMarkup = loading ? (
             <div className={classes.spinnerDiv}>
@@ -88,11 +85,11 @@ class PostDialog extends Component {
                         </IconButton>
                     </Tooltip>
                     
-                    <hr className={classes.invisibleSeperator} />
+                    <hr className={classes.invisibleSeparator} />
                     <Typography variant="body2" color="textSecondary">
                         {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
                     </Typography>
-                    <hr className={classes.invisibleSeperator} />
+                    <hr className={classes.invisibleSeparator} />
                     <Typography variant="body1">
                         {body}
                     </Typography>
@@ -105,6 +102,8 @@ class PostDialog extends Component {
                     </Tooltip>
                     <span>{commentCount} Comments</span>
                 </Grid>
+                <hr className={classes.visibleSeparator}/> 
+                <Comments comments={comments}/>
             </Grid>
         )
 
