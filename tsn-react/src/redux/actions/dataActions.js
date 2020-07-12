@@ -104,7 +104,7 @@ export const deletePost = (postId) => (dispatch) => {
 }
 
 export const getUserData = (userHandle) => (dispatch) => {
-    dispatch({ type: LOADING_UI })
+    dispatch({ type: LOADING_DATA })
     axios.get(`/user/${userHandle}`)
         .then(res => {
             dispatch({
