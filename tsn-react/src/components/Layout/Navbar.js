@@ -7,7 +7,7 @@ import CreatePost from '../Post/CreatePost'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 // Icons
-import Notifications from '@material-ui/icons/Notifications'
+import Notifications from './Notifications'
 
 import { Tooltip } from '@material-ui/core';
 
@@ -23,11 +23,7 @@ class Navigationbar extends Component{
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <CreatePost />
-              <Tooltip title="Notifications">
-                <IconButton>
-                  <Notifications color="primary"/>
-                </IconButton>
-              </Tooltip>
+                <Notifications />
             </Nav>
           </Navbar.Collapse>
           </Fragment>
