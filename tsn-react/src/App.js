@@ -55,6 +55,7 @@ function App() {
               <AuthRoute exact path="/login" comp={login} />
               <AuthRoute exact path="/signup" comp={signup} />
               <Route exact path="/user/:handle" component={user} />
+              <Route exact path="/user/:handle/post/:postId" component={user} />
             </Switch>
           </div>
         </Router>
