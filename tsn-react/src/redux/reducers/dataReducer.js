@@ -12,7 +12,7 @@ export default function(state = initialState, action){
         case LOADING_DATA: 
             return {
                 ...state,
-                loading: false
+                loading: true
             }
         case SET_POSTS:
             return{

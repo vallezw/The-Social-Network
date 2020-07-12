@@ -26,7 +26,7 @@ export default function(state = initialState, action){
         case LOADING_USER:
             return {
                 ...state,
-                loadign: true
+                loading: true
             }
         case LIKE_POST:
             return {
