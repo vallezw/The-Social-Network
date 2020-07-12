@@ -13,7 +13,7 @@ import DeleteOutline from '@material-ui/icons/DeleteOutline'
 // Redux Stuff
 
 import { connect } from 'react-redux'
-import { deletePost } from '../redux/actions/dataActions'
+import { deletePost } from '../../redux/actions/dataActions'
 import { Tooltip, IconButton } from '@material-ui/core'
 
 const styles = {
