@@ -59,7 +59,7 @@ export class Post extends Component {
                 image={userImage}
                 title="Profile Image" className={classes.image}/>
                 <CardContent className={classes.content}>
-                    <Typography variant="h5" component={Link} to={`/users/${userHandle}`} color="primary">{userHandle}</Typography>
+                    <Typography variant="h5" component={Link} to={`/user/${userHandle}`} color="primary">{userHandle}</Typography>
                     {deleteButton}
                     <Typography variant="body2" color="textSecondary">{dayjs(createdAt).fromNow()}</Typography>
                     <Typography variant="body1">{body}</Typography>

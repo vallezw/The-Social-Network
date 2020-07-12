@@ -39,7 +39,7 @@ class Comments extends Component {
                                     </Grid>
                                     <Grid item sm={9}>
                                         <div className={classes.commentData}>
-                                            <Typography variant="h5" component={Link} to={`/users/${userHandle}`} color="primary">
+                                            <Typography variant="h5" component={Link} to={`/user/${userHandle}`} color="primary">
                                                 {userHandle}
                                             </Typography>
                                             <Typography variant="body2" color="textSecondary">

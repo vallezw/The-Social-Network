@@ -78,7 +78,7 @@ class PostDialog extends Component {
                     <img src={userImage} alt="Profile" className={classes.profileImage} />
                 </Grid>
                 <Grid item sm={6}>
-                    <Typography className={classes.userTitle} component={Link} color="primary" variant="h5" to={`/users/${userHandle}`}>
+                    <Typography className={classes.userTitle} component={Link} color="primary" variant="h5" to={`/user/${userHandle}`}>
                         @{userHandle}
                     </Typography>
                     <Tooltip title="Close">
