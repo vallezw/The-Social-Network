@@ -52,7 +52,7 @@ const ProfileSkeleton = (props) => {
                             <hr />
                             <LocationOnIcon /> <span>location</span>
                             <hr/>
-                            <LinkIcon /> https://website.com
+                            <LinkIcon /> Personal Website
                             <hr />
                             <CalendarTodayIcon /> Joined date
                         </div>
