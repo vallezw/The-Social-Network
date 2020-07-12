@@ -31,7 +31,9 @@ export default function(state = initialState, action){
             index = state.posts.findIndex((post) => post.postId === action.payload.postId)
             state.posts[index] = action.payload
             if(state.post.postId === action.payload.postId){
+                let temp = state.post.comments
                 state.post = action.payload
+                state.post.comments = temp
             }
             return{
                 ...state
