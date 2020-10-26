@@ -4,6 +4,7 @@ import axios from 'axios'
 // Get all Posts
 export const getPosts = () => dispatch => {
     dispatch({ type: LOADING_DATA })
+    console.log("In get")
     axios.get('/posts')
         .then(res => {
             dispatch({
@@ -12,6 +13,7 @@ export const getPosts = () => dispatch => {
             })
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: SET_POSTS,
                 payload: []

@@ -18,7 +18,7 @@ exports.signup = (request, response) => {
 
   if(!valid) return response.status(400).json(errors)
 
-  const noImg = 'blank-profile-picture-973460_960_720.webp'
+  const noImg = 'blank-profile-picture-973460_1280.png'
 
   let token, userId
   db.doc("/Users/" + newUser.handle)
