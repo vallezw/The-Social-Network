@@ -119,7 +119,8 @@ class signup extends Component {
                             <Typography variant="body2" className={classes.customError}>
                                 {errors.general}
                             </Typography>
-                        )}                           
+                        )}
+                        {/* Damit Christo nciht nervt                           
                         <Button 
                         type="submit" 
                         variant="contained" 
@@ -132,8 +133,11 @@ class signup extends Component {
                                 <CircularProgress size={30} className={classes.progress} />
                             )}
                         </Button>
+                            */}
+                        <small>Sign up currently disabled</small>
                         <br />
                         <br />
+                        
                         <small>Already have an account? Log In <Link to="/login">here</Link></small>
                     </form>
                 </Grid>

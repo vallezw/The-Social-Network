@@ -23,7 +23,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import axios from 'axios';
 
 
-axios.defaults.baseURL = "https://europe-west1-the-social-network-c6953.cloudfunctions.net/api"
+axios.defaults.baseURL = "https://europe-west1-the-social-network-a4586.cloudfunctions.net/api"
 
 const theme = createMuiTheme(themeFile)
 

@@ -43,7 +43,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://europe-west1-the-social-network-c6953.cloudfunctions.net/api",
+  "proxy": "https://europe-west1-the-social-network-a4586.cloudfunctions.net/api",
   "devDependencies": {
     "prettier": "2.0.5"
   }

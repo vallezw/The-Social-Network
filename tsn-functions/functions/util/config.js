@@ -1,10 +1,10 @@
 module.exports = {
-    apiKey: "AIzaSyAsyZIH8Dz7MK63wmJFRAxFEd9ZaR8uq-g",
-    authDomain: "the-social-network-c6953.firebaseapp.com",
-    databaseURL: "https://the-social-network-c6953.firebaseio.com",
-    projectId: "the-social-network-c6953",
-    storageBucket: "the-social-network-c6953.appspot.com",
-    messagingSenderId: "91832711976",
-    appId: "1:91832711976:web:14779826c79a395411ee1d",
-    measurementId: "G-TWCZW93T58"
-  };
+  apiKey: "AIzaSyAYJhwfl7nQlvMY-BlxxZlq0I3d-w3OVN4",
+  authDomain: "the-social-network-a4586.firebaseapp.com",
+  databaseURL: "https://the-social-network-a4586.firebaseio.com",
+  projectId: "the-social-network-a4586",
+  storageBucket: "the-social-network-a4586.appspot.com",
+  messagingSenderId: "9489606488",
+  appId: "1:9489606488:web:42e2ce7169c263928b272d",
+  measurementId: "G-C0BSRSSC2G"
+};
