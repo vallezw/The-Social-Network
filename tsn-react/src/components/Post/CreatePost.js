@@ -80,7 +80,7 @@ class CreatePost extends Component {
             <Fragment>
                 <Tooltip title="Create a Post!">
                     <IconButton onClick={this.handleOpen}>
-                        <AddIcon color="black"/>
+                        <AddIcon />
                     </IconButton>
               </Tooltip>
               <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">

@@ -5,6 +5,9 @@ const exapp = express()
 
 const FBAuth = require('./util/fbAuth');
 
+const cors = require('cors');
+exapp.use(cors())
+
 const { db } = require('./util/admin');
 
 const { getAllPosts, postOnePost, getPost, commentOnPost, likePost, unlikePost, deletePost } = require('./handlers/posts');
